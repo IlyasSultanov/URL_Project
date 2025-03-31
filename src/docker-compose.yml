@@ -7,19 +7,10 @@ services:
       - "8000:8000"
     volumes:
       - .:/app
+      - sqlite_data:/app/db 
     environment:
       - DEBUG=0
-    depends_on:
-      - db
-
-  db:
-    image: postgres:13
-    volumes:
-      - postgres_data:/var/lib/postgresql/data/
-    environment:
-      - POSTGRES_DB=urlproject
-      - POSTGRES_USER=urluser
-      - POSTGRES_PASSWORD=urlpass
+      - DATABASE_URL=sqlite:///db/database.db  
 
 volumes:
-  postgres_data:
+  sqlite_data:
